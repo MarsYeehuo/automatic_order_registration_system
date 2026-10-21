@@ -1,0 +1,8 @@
+COMMERCIAL INVOICE
+Invoice No: INV-DUP-1
+Invoice Date: 10/01/2026
+Issuer: Ocean Line Ltd
+Bill To: Origin Agent Ltd
+TOTAL AMOUNT: 10.00 USD
+
+Handling Fee 10.00 USD

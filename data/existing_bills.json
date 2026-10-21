@@ -1,0 +1,88 @@
+{
+  "version": "1.0.0",
+  "description": "本地已有账单仓储（脱敏示例）。生产环境可替换为数据库/财务系统适配器。",
+  "bills": [
+    {
+      "bill_id": "BILL-1001",
+      "document_type": "Debit Note",
+      "reference_no": "DC-108478",
+      "document_date": "2026-10-24",
+      "issuer": "NEPTUNE SHIPPING LIMITED (LAX)",
+      "recipient": "湃乐多（上海）航运科技有限公司",
+      "master_bl_no": "MAEU275752922",
+      "house_bl_no": "CGT260801188",
+      "booking_no": null,
+      "container_nos": [
+        "MRSU2571577",
+        "TCLU8619685"
+      ],
+      "document_total": 1300.00,
+      "document_currency": "USD",
+      "charges": [
+        {
+          "charge_item": "Handling Charge",
+          "raw_charge_name": "HANDLING CHARGE",
+          "amount": 65.00,
+          "currency": "USD",
+          "payment_term": "CC",
+          "quantity": 1,
+          "unit_price": 65.00
+        },
+        {
+          "charge_item": "Additional Detention Free Time Charge",
+          "raw_charge_name": "4 ADD'L DETENTION FREE TIME CHARGE",
+          "amount": 1200.00,
+          "currency": "USD",
+          "payment_term": "CC",
+          "quantity": 1,
+          "unit_price": 1200.00
+        },
+        {
+          "charge_item": "Handling Charge",
+          "raw_charge_name": "HANDLING CHARGE",
+          "amount": 35.00,
+          "currency": "USD",
+          "payment_term": "CC",
+          "quantity": 1,
+          "unit_price": 35.00
+        }
+      ]
+    },
+    {
+      "bill_id": "BILL-1002",
+      "document_type": "Invoice",
+      "reference_no": "ORFR1618731",
+      "document_date": "2026-09-30",
+      "issuer": "ZIM",
+      "recipient": "ALL AMERICA FORWARDING",
+      "master_bl_no": "ZIMUNGB1312144",
+      "house_bl_no": null,
+      "booking_no": null,
+      "container_nos": [
+        "JXLU4594463"
+      ],
+      "document_total": 26.90,
+      "document_currency": "USD",
+      "charges": [
+        {
+          "charge_item": "Wharfage Administration Fee",
+          "raw_charge_name": "WHARFAGE ADMINISTRATION FEE",
+          "amount": 5.00,
+          "currency": "USD",
+          "payment_term": "PP",
+          "quantity": 1,
+          "unit_price": 5.00
+        },
+        {
+          "charge_item": "Wharfage",
+          "raw_charge_name": "WHARFAGE",
+          "amount": 21.90,
+          "currency": "USD",
+          "payment_term": "PP",
+          "quantity": 1,
+          "unit_price": 21.90
+        }
+      ]
+    }
+  ]
+}

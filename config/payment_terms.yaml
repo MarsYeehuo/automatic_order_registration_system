@@ -1,0 +1,39 @@
+# Payment-term normalization.
+# PP = freight/handling prepaid at origin; CC = collect/payable at destination.
+# Matches are case-insensitive and are applied to the whole token, not as a substring,
+# except for the explicit phrases listed below.
+version: "1.0.0"
+terms:
+  PP:
+    - PP
+    - P/P
+    - PREPAID
+    - PRE PAID
+    - PRE-PAID
+    - FREIGHT PREPAID
+    - FREIGHT PRE-PAID
+    - PREPAY
+    - PREPAYMENT
+    - PAY AT ORIGIN
+    - ORIGIN PAYMENT
+    - PREPAID AT ORIGIN
+  CC:
+    - CC
+    - C/C
+    - COLLECT
+    - FREIGHT COLLECT
+    - COLLECT FREIGHT
+    - PAY AT DESTINATION
+    - DESTINATION COLLECT
+    - PAYABLE AT DESTINATION
+    - COD
+    - CASH ON DELIVERY
+    - PAY ON ARRIVAL
+# Output aliases accepted in existing bills and user-facing text.
+display:
+  PP: PP
+  CC: CC
+# Single-letter P/C columns found on debit notes. Only applied inside a charge row.
+column_tokens:
+  P: PP
+  C: CC

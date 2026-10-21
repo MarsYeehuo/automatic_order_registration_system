@@ -1,0 +1,189 @@
+# Canonical charge dictionary.
+# Matching order in code: exact -> normalized exact -> alias -> fuzzy (threshold in settings).
+# Keep aliases uppercase; the matcher normalizes case and punctuation before comparison.
+version: "1.0.0"
+charges:
+  - canonical: Handling Charge
+    aliases:
+      - HANDLING FEE
+      - HANDLING CHARGES
+      - H/D FEE
+      - HD FEE
+      - H/C
+      - HC
+      - HANDLING
+      - 操作费
+      - 手续费
+
+  - canonical: Documentation Fee
+    aliases:
+      - DOC FEE
+      - DOCUMENT FEE
+      - DOCUMENTATION CHARGE
+      - DOCUMENTATION CHARGES
+      - DOC
+      - 文件费
+      - 单证费
+
+  - canonical: Terminal Handling Charge
+    aliases:
+      - THC
+      - TERMINAL HANDLING
+      - TERMINAL HANDLING FEE
+      - 码头操作费
+      - 港杂费
+
+  - canonical: Trucking Charge
+    aliases:
+      - TRUCKING FEE
+      - TRUCKING
+      - TRUCK FEE
+      - DRAYAGE
+      - DRAYAGE CHARGE
+      - 拖车费
+      - 卡车费
+
+  - canonical: Customs Clearance Fee
+    aliases:
+      - CUSTOMS FEE
+      - CUSTOMS CLEARANCE
+      - CUSTOMS CLEARANCE CHARGE
+      - CUSTOMS DECLARATION FEE
+      - CUSTOMS
+      - 报关费
+      - 清关费
+
+  - canonical: Storage Charge
+    aliases:
+      - STORAGE FEE
+      - STORAGE
+      - WAREHOUSE STORAGE
+      - 仓储费
+      - 堆存费
+
+  - canonical: Wharfage
+    aliases:
+      - WHARFAGE FEE
+      - WHARFAGE CHARGE
+      - 码头费
+
+  - canonical: Wharfage Administration Fee
+    aliases:
+      - WHARFAGE ADMINISTRATION FEE
+      - WHARFAGE ADMIN FEE
+      - 码头管理费
+
+  - canonical: On Carriage Additional
+    aliases:
+      - ON CARRIAGE ADDITIONAL - US EM
+      - ON CARRIAGE ADDITIONAL - US
+      - ON-CARRIAGE ADDITIONAL
+      - ONCARRIAGE ADDITIONAL
+      - 内陆转运附加费
+
+  - canonical: Additional Detention Free Time Charge
+    aliases:
+      - ADD'L DETENTION FREE TIME CHARGE
+      - ADDITIONAL DETENTION FREE TIME CHARGE
+      - ADDITIONAL DETENTION FREE TIME
+      - ADD'L DETENTION
+      - EXTRA DETENTION FREE TIME
+      - 额外免箱期费用
+      - 超期用箱费
+
+  - canonical: Detention Charge
+    aliases:
+      - DETENTION
+      - DETENTION FEE
+      - DEMURRAGE
+      - DEMURRAGE CHARGE
+      - 滞箱费
+      - 滞港费
+
+  - canonical: Demurrage Charge
+    aliases:
+      - DEMURRAGE FEE
+      - PORT DEMURRAGE
+      - 堆存滞期费
+
+  - canonical: Freight Charge
+    aliases:
+      - FREIGHT
+      - OCEAN FREIGHT
+      - SEAFREIGHT
+      - BASIC OCEAN FREIGHT
+      - 海运费
+
+  - canonical: Bunker Adjustment Factor
+    aliases:
+      - BAF
+      - BUNKER SURCHARGE
+      - FUEL SURCHARGE
+      - 燃油附加费
+
+  - canonical: Currency Adjustment Factor
+    aliases:
+      - CAF
+      - CURRENCY SURCHARGE
+      - 货币附加费
+
+  - canonical: Peak Season Surcharge
+    aliases:
+      - PSS
+      - PEAK SEASON
+      - 旺季附加费
+
+  - canonical: Port Congestion Surcharge
+    aliases:
+      - PCS
+      - PORT CONGESTION
+      - 港口拥堵附加费
+
+  - canonical: Bill of Lading Fee
+    aliases:
+      - BL FEE
+      - B/L FEE
+      - BILL OF LADING FEE
+      - 提单费
+
+  - canonical: Amendment Fee
+    aliases:
+      - AMENDMENT CHARGE
+      - AMEND FEE
+      - 改单费
+
+  - canonical: Telex Release Fee
+    aliases:
+      - TELEX FEE
+      - TELEX RELEASE CHARGE
+      - 电放费
+
+  - canonical: Insurance Fee
+    aliases:
+      - INSURANCE
+      - INSURANCE CHARGE
+      - 保险费
+
+  - canonical: Inspection Fee
+    aliases:
+      - INSPECTION CHARGE
+      - 查验费
+
+  - canonical: Administration Fee
+    aliases:
+      - ADMIN FEE
+      - ADMINISTRATIVE FEE
+      - ADMINISTRATION CHARGE
+      - 管理费
+
+  - canonical: VGM Fee
+    aliases:
+      - VGM
+      - VERIFIED GROSS MASS FEE
+      - 称重费
+
+  - canonical: ISPS Fee
+    aliases:
+      - ISPS
+      - ISPS CHARGE
+      - 安保费

@@ -1,0 +1,64 @@
+{
+  "version": "1.0.0",
+  "bills": [
+    {
+      "bill_id": "BILL-9001",
+      "document_type": "Debit Note",
+      "reference_no": "DN-202609-001",
+      "document_date": "2026-09-20",
+      "issuer": "Destination Agent Ltd",
+      "recipient": "Origin Agent Ltd",
+      "master_bl_no": "TEST123456789",
+      "house_bl_no": null,
+      "booking_no": null,
+      "container_nos": [],
+      "document_total": 140.00,
+      "document_currency": "USD",
+      "charges": [
+        {
+          "charge_item": "Handling Charge",
+          "raw_charge_name": "HANDLING CHARGE",
+          "amount": 40.00,
+          "currency": "USD",
+          "payment_term": "PP",
+          "quantity": 1,
+          "unit_price": 40.00
+        },
+        {
+          "charge_item": "Documentation Fee",
+          "raw_charge_name": "DOC FEE",
+          "amount": 100.00,
+          "currency": "USD",
+          "payment_term": "PP",
+          "quantity": 1,
+          "unit_price": 100.00
+        }
+      ]
+    },
+    {
+      "bill_id": "BILL-9002",
+      "document_type": "Debit Note",
+      "reference_no": "DN-202609-002",
+      "document_date": "2026-09-21",
+      "issuer": "Destination Agent Ltd",
+      "recipient": "Origin Agent Ltd",
+      "master_bl_no": "TEST987654321",
+      "house_bl_no": null,
+      "booking_no": null,
+      "container_nos": ["TEST1234567"],
+      "document_total": 160.00,
+      "document_currency": "USD",
+      "charges": [
+        {
+          "charge_item": "Terminal Handling Charge",
+          "raw_charge_name": "THC",
+          "amount": 60.00,
+          "currency": "USD",
+          "payment_term": "CC",
+          "quantity": 1,
+          "unit_price": 60.00
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,147 @@
+{
+  "version": "1.0.0",
+  "description": "Deterministic golden set for the rule/validation/matching/decision path. OCR and LLM are disabled; every expected value comes from the checked-in fixtures and existing_bills.",
+  "existing_bills": "tests/fixtures/existing/bills.json",
+  "cases": [
+    {
+      "id": "arrival_notice",
+      "description": "Arrival notice with an actionable handling fee is posted as AP per non_bill_operation=CREATE.",
+      "inputs": ["tests/fixtures/bills/arrival_notice.txt"],
+      "expected": [
+        {
+          "charge_item": "Handling Charge",
+          "amount": 25.0,
+          "currency": "USD",
+          "payment_term": null,
+          "operation": "CREATE",
+          "posting_type": "AP"
+        }
+      ]
+    },
+    {
+      "id": "text_invoice",
+      "description": "Text invoice: two aliases normalize to canonical charge names.",
+      "inputs": ["tests/fixtures/bills/simple_invoice.txt"],
+      "expected": [
+        {
+          "charge_item": "Handling Charge",
+          "amount": 40.0,
+          "currency": "USD",
+          "payment_term": null,
+          "operation": "CREATE",
+          "posting_type": "AP"
+        },
+        {
+          "charge_item": "Customs Clearance Fee",
+          "amount": 50.0,
+          "currency": "USD",
+          "payment_term": null,
+          "operation": "CREATE",
+          "posting_type": "AP"
+        }
+      ]
+    },
+    {
+      "id": "update_bill",
+      "description": "Reference + charge match: change amount to UPDATE, identical amount to NO_CHANGE, inherit payment term PP.",
+      "inputs": ["tests/fixtures/bills/update_bill.txt"],
+      "expected": [
+        {
+          "charge_item": "Handling Charge",
+          "amount": 45.0,
+          "currency": "USD",
+          "payment_term": "PP",
+          "operation": "UPDATE",
+          "posting_type": "AP"
+        },
+        {
+          "charge_item": "Documentation Fee",
+          "amount": 100.0,
+          "currency": "USD",
+          "payment_term": "PP",
+          "operation": "NO_CHANGE",
+          "posting_type": "AP"
+        }
+      ]
+    },
+    {
+      "id": "excel_bill",
+      "description": "Excel bill: table extraction, THC alias, amount-based update against BILL-9002, CC payment term.",
+      "inputs": ["tests/fixtures/bills/table_bill.xlsx"],
+      "expected": [
+        {
+          "charge_item": "Terminal Handling Charge",
+          "amount": 65.0,
+          "currency": "USD",
+          "payment_term": "CC",
+          "operation": "UPDATE",
+          "posting_type": "AP"
+        },
+        {
+          "charge_item": "Trucking Charge",
+          "amount": 100.0,
+          "currency": "USD",
+          "payment_term": "CC",
+          "operation": "CREATE",
+          "posting_type": "AP"
+        }
+      ]
+    },
+    {
+      "id": "word_bill",
+      "description": "Word bill: paragraph metadata plus a charge table.",
+      "inputs": ["tests/fixtures/bills/word_bill.docx"],
+      "expected": [
+        {
+          "charge_item": "Trucking Charge",
+          "amount": 100.0,
+          "currency": "USD",
+          "payment_term": "PP",
+          "operation": "CREATE",
+          "posting_type": "AP"
+        }
+      ]
+    },
+    {
+      "id": "email_prealert",
+      "description": "Email body extraction from a non-bill document produces a record and creates by configuration.",
+      "inputs": ["tests/fixtures/eml/prealert.eml"],
+      "expected": [
+        {
+          "charge_item": "Handling Charge",
+          "amount": 50.0,
+          "currency": "USD",
+          "payment_term": null,
+          "operation": "CREATE",
+          "posting_type": "AP"
+        }
+      ]
+    },
+    {
+      "id": "batch_duplicate_create",
+      "description": "The same reference/charge/amount in two different documents yields one CREATE and one PENDING_REVIEW.",
+      "inputs": [
+        "tests/fixtures/duplicates/dup_a.txt",
+        "tests/fixtures/duplicates/dup_b.txt"
+      ],
+      "expected": [
+        {
+          "charge_item": "Handling Charge",
+          "amount": 10.0,
+          "currency": "USD",
+          "payment_term": null,
+          "operation": "CREATE",
+          "posting_type": "AP"
+        },
+        {
+          "charge_item": "Handling Charge",
+          "amount": 10.0,
+          "currency": "USD",
+          "payment_term": null,
+          "operation": "PENDING_REVIEW",
+          "posting_type": null
+        }
+      ]
+    }
+  ]
+}

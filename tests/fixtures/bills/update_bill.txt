@@ -1,0 +1,11 @@
+DEBIT NOTE
+D/C No.: DN-202609-001
+D/C DATE: 09-20-2026
+Issuer: Destination Agent Ltd
+Bill To: Origin Agent Ltd
+MASTER B/L NO.: TEST123456789
+PAYMENT TERMS: PP
+TOTAL AMOUNT: 145.00 USD
+
+Handling Fee 45.00 USD
+Doc Fee 100.00 USD

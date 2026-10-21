@@ -1,0 +1,117 @@
+project:
+  name: shipping-billing-agent
+  rule_version: "1.0.0"
+  prompt_version: "1.0.0"
+
+accounting_entity:
+  name: "湃乐多（上海）航运科技有限公司"
+  display_name: "湃乐多（上海）航运科技有限公司 / Pilot Aiship Tech co., Ltd."
+  role_hint: "Origin Agent"
+  aliases:
+    - "湃乐多（上海）航运科技有限公司"
+    - "湃乐多(上海)航运科技有限公司"
+    - "Pilot Aiship Tech co., Ltd."
+    - "Pilot Aiship Tech"
+    - "PLT"
+    - "湃乐多"
+    - "Origin Agent"
+
+# Per-file accounting-entity overrides. Keys are file names or source paths.
+entity_overrides: {}
+
+non_bill_operation: "CREATE"
+
+ocr:
+  endpoint: "http://36.103.199.11:5002/process"
+  task: "orderChange"
+  task_type: ""
+  callback: ""
+  timeout_connect: 5
+  timeout_read: 90
+  retries: 1
+  retry_backoff_seconds: 2
+  # tunnel = start a localhost.run SSH tunnel around a 127.0.0.1-only file server
+  # static = write to ocr.public_dir and use ocr.public_base_url
+  # none   = do not call OCR; documents that need it become PENDING_REVIEW
+  url_mode: "tunnel"
+  public_base_url: null
+  public_dir: "outputs/_public"
+  serve_dir: "outputs/_tmp"
+  max_file_mb: 60
+  cache_dir: "outputs/ocr_cache"
+  raw_dir: "outputs/ocr_raw"
+  tunnel:
+    provider: "localhostrun"
+    ssh_bin: null
+    remote: "nokey@localhost.run"
+    startup_timeout_seconds: 30
+    keepalive_interval: 15
+
+llm:
+  enabled: true
+  key_file: null
+  provider: null
+  base_url: null
+  model: null
+  temperature: 0
+  max_tokens: 4096
+  timeout_seconds: 120
+  retries: 1
+  cache_dir: "outputs/llm_cache"
+  max_input_chars: 14000
+
+parsing:
+  max_eml_depth: 3
+  max_attachment_mb: 60
+  inline_images: "ignore"
+  # ocr_all_pdfs=true improves recall for invoices whose charge table is an
+  # embedded image; transport documents (B/L, sea waybill) are skipped because
+  # they never carry billable charge lines.
+  ocr_all_pdfs: true
+  min_pdf_text_chars: 80
+  date_locale: "US"
+  supported_extensions:
+    - ".eml"
+    - ".pdf"
+    - ".png"
+    - ".jpg"
+    - ".jpeg"
+    - ".tif"
+    - ".tiff"
+    - ".bmp"
+    - ".xlsx"
+    - ".xls"
+    - ".docx"
+    - ".doc"
+    - ".txt"
+
+validation:
+  amount_tolerance: 0.01
+  total_tolerance: 0.02
+  unit_price_tolerance: 0.02
+  min_charge_confidence: 0.45
+  min_auto_operation_confidence: 0.70
+  suspicious_character_correction: true
+  allow_zero_amount: false
+  max_future_days: 730
+
+matching:
+  charge_name_fuzzy_threshold: 0.86
+  party_fuzzy_threshold: 0.82
+  date_tolerance_days: 0
+  amount_tolerance: 0.01
+  # Order follows the task statement.
+  rule_order:
+    - "reference_charge"
+    - "bl_charge_currency"
+    - "booking_charge_currency"
+    - "container_parties_date_amount"
+
+output:
+  extended: false
+  results_file: "results.json"
+  audit_file: "audit.jsonl"
+  summary_file: "summary.json"
+  include_raw_text_in_audit: true
+  redact_sensitive: true
+  ensure_ascii: false

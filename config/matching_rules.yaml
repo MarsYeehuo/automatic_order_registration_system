@@ -1,0 +1,49 @@
+# Existing-bill matching is deterministic and ordered. A later rule is evaluated only
+# when every earlier rule returns zero candidates.
+version: "1.0.0"
+rules:
+  - id: reference_charge
+    description: 单据编号 + 标准费用名称
+    keys: [reference_no, standardized_charge_name]
+  - id: bl_charge_currency
+    description: 提单号（优先 master，其次 house）+ 标准费用名称 + 币种
+    keys: [bl_no, standardized_charge_name, currency]
+  - id: booking_charge_currency
+    description: 订舱号 + 标准费用名称 + 币种
+    keys: [booking_no, standardized_charge_name, currency]
+  - id: container_parties_date_amount
+    description: 箱号 + 交易双方 + 日期 + 金额
+    keys: [container_no, parties, document_date, amount]
+
+# When several existing rows share the same reference + charge name, try these
+# discriminators in order before declaring the match ambiguous.
+charge_row_disambiguation:
+  - amount
+  - unit_price
+  - quantity
+  - payment_term
+
+# Fields that may be overwritten by an UPDATE. A field is only written when the
+# incoming document provides an explicit, validated value for it.
+update_whitelist:
+  - amount
+  - currency
+  - payment_term
+  - quantity
+  - unit_price
+  - reference_no
+  - document_date
+  - master_bl_no
+  - house_bl_no
+  - booking_no
+  - container_nos
+  - issuer
+  - recipient
+  - document_type
+
+# Fields that are never auto-written, even when the incoming document disagrees.
+immutable_fields:
+  - bill_id
+
+# A row whose amount differs from the existing value by no more than this is NO_CHANGE.
+no_change_amount_tolerance: 0.01

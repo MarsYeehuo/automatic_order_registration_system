@@ -1,0 +1,39 @@
+# AR/AP rules are evaluated from the accounting entity's point of view.
+# Document type (Debit Note / Credit Note / Invoice) is deliberately NOT a direct input.
+version: "1.0.0"
+resolution_order:
+  - id: entity_is_issuer
+    when: accounting_entity matches issuer (and is not the recipient)
+    posting_type: AR
+    reason: 记账主体是单据签发方，向交易对手收取费用
+  - id: entity_is_recipient
+    when: accounting_entity matches recipient (and is not the issuer)
+    posting_type: AP
+    reason: 记账主体是单据接收方，向交易对手支付费用
+  - id: entity_is_both
+    when: accounting_entity matches both issuer and recipient
+    posting_type: null
+    action: PENDING_REVIEW
+    reason: 签发方与接收方相同，无法判断应收应付
+  - id: entity_not_party
+    when: accounting_entity matches neither party
+    posting_type: null
+    action: PENDING_REVIEW
+    reason: 记账主体未出现在交易双方中
+
+# Explicit textual direction hints. They are supporting evidence only and never
+# override a party match on their own.
+direction_hints:
+  creditor:
+    - 收款方
+    - 收款人
+    - BALANCE DUE TO
+    - REMIT TO
+    - BENEFICIARY
+    - PAYABLE TO
+    - AMOUNT DUE
+  debtor:
+    - PLEASE PAY
+    - 请支付
+    - 应付
+    - PAYMENT DUE FROM

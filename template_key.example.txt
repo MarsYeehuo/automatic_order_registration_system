@@ -1,0 +1,8 @@
+# Copy this file to template_key.txt and fill in real values.
+# template_key.txt is gitignored and must never be committed.
+# Either key: value lines or a JSON object are accepted.
+
+供应商：openai
+模型名字：your-model-name
+base_url: https://your-llm-endpoint.example/v1
+api_key: sk-replace-me

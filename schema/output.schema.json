@@ -1,0 +1,581 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ShippingBillingResults",
+  "type": "array",
+  "items": {
+    "$ref": "#/$defs/OutputRecord"
+  },
+  "$defs": {
+    "AuditTrail": {
+      "additionalProperties": true,
+      "properties": {
+        "run_id": {
+          "title": "Run Id",
+          "type": "string"
+        },
+        "record_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Record Id"
+        },
+        "source_documents": {
+          "items": {
+            "$ref": "#/$defs/SourceDocumentRef"
+          },
+          "title": "Source Documents",
+          "type": "array"
+        },
+        "field_evidence": {
+          "items": {
+            "$ref": "#/$defs/FieldEvidence"
+          },
+          "title": "Field Evidence",
+          "type": "array"
+        },
+        "validation_results": {
+          "items": {
+            "$ref": "#/$defs/ValidationIssue"
+          },
+          "title": "Validation Results",
+          "type": "array"
+        },
+        "match_candidates": {
+          "items": {
+            "$ref": "#/$defs/MatchCandidate"
+          },
+          "title": "Match Candidates",
+          "type": "array"
+        },
+        "ai_reasoning": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Ai Reasoning",
+          "type": "array"
+        },
+        "review_reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Review Reasons",
+          "type": "array"
+        },
+        "rules_version": {
+          "default": "",
+          "title": "Rules Version",
+          "type": "string"
+        },
+        "prompt_version": {
+          "default": "",
+          "title": "Prompt Version",
+          "type": "string"
+        },
+        "document_kind": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Document Kind"
+        },
+        "classification_confidence": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Classification Confidence"
+        },
+        "operation_reason": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Operation Reason",
+          "type": "array"
+        },
+        "update_patch": {
+          "additionalProperties": true,
+          "title": "Update Patch",
+          "type": "object"
+        },
+        "inherited_fields": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Inherited Fields",
+          "type": "array"
+        },
+        "existing_bill_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Existing Bill Id"
+        },
+        "raw_charge_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Raw Charge Name"
+        },
+        "charge_confidence": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Charge Confidence"
+        },
+        "source_sha256": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Sha256"
+        },
+        "document_metadata": {
+          "additionalProperties": true,
+          "title": "Document Metadata",
+          "type": "object"
+        },
+        "llm": {
+          "additionalProperties": true,
+          "title": "Llm",
+          "type": "object"
+        }
+      },
+      "required": [
+        "run_id"
+      ],
+      "title": "AuditTrail",
+      "type": "object"
+    },
+    "ChargeDetails": {
+      "properties": {
+        "charge_item": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Charge Item"
+        },
+        "amount": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Amount"
+        },
+        "currency": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Currency"
+        },
+        "payment_term": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Payment Term"
+        }
+      },
+      "title": "ChargeDetails",
+      "type": "object"
+    },
+    "DocumentInfo": {
+      "properties": {
+        "document_type": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Document Type"
+        },
+        "reference_no": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reference No"
+        },
+        "document_date": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Document Date"
+        }
+      },
+      "title": "DocumentInfo",
+      "type": "object"
+    },
+    "ExtractionMethod": {
+      "enum": [
+        "RULE",
+        "TABLE",
+        "EML_BODY",
+        "OCR",
+        "LLM",
+        "INHERITED"
+      ],
+      "title": "ExtractionMethod",
+      "type": "string"
+    },
+    "FieldEvidence": {
+      "properties": {
+        "field": {
+          "title": "Field",
+          "type": "string"
+        },
+        "source_file": {
+          "title": "Source File",
+          "type": "string"
+        },
+        "location": {
+          "title": "Location",
+          "type": "string"
+        },
+        "raw_text": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Raw Text"
+        },
+        "method": {
+          "$ref": "#/$defs/ExtractionMethod"
+        },
+        "confidence": {
+          "default": 1.0,
+          "title": "Confidence",
+          "type": "number"
+        },
+        "note": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Note"
+        }
+      },
+      "required": [
+        "field",
+        "source_file",
+        "location",
+        "method"
+      ],
+      "title": "FieldEvidence",
+      "type": "object"
+    },
+    "FinancialAttributes": {
+      "properties": {
+        "accounting_entity": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Accounting Entity"
+        },
+        "posting_type": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Posting Type"
+        }
+      },
+      "title": "FinancialAttributes",
+      "type": "object"
+    },
+    "MatchCandidate": {
+      "properties": {
+        "bill_id": {
+          "title": "Bill Id",
+          "type": "string"
+        },
+        "rule_id": {
+          "title": "Rule Id",
+          "type": "string"
+        },
+        "charge_index": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Charge Index"
+        },
+        "score": {
+          "default": 0.0,
+          "title": "Score",
+          "type": "number"
+        },
+        "details": {
+          "additionalProperties": true,
+          "title": "Details",
+          "type": "object"
+        }
+      },
+      "required": [
+        "bill_id",
+        "rule_id"
+      ],
+      "title": "MatchCandidate",
+      "type": "object"
+    },
+    "OperationType": {
+      "enum": [
+        "CREATE",
+        "UPDATE",
+        "NO_CHANGE",
+        "PENDING_REVIEW"
+      ],
+      "title": "OperationType",
+      "type": "string"
+    },
+    "Severity": {
+      "enum": [
+        "INFO",
+        "WARNING",
+        "ERROR"
+      ],
+      "title": "Severity",
+      "type": "string"
+    },
+    "SourceDocumentRef": {
+      "properties": {
+        "file": {
+          "title": "File",
+          "type": "string"
+        },
+        "location": {
+          "title": "Location",
+          "type": "string"
+        },
+        "document_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Document Id"
+        }
+      },
+      "required": [
+        "file",
+        "location"
+      ],
+      "title": "SourceDocumentRef",
+      "type": "object"
+    },
+    "TransactionParty": {
+      "properties": {
+        "issuer": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Issuer"
+        },
+        "recipient": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Recipient"
+        }
+      },
+      "title": "TransactionParty",
+      "type": "object"
+    },
+    "ValidationIssue": {
+      "properties": {
+        "code": {
+          "title": "Code",
+          "type": "string"
+        },
+        "severity": {
+          "$ref": "#/$defs/Severity"
+        },
+        "message": {
+          "title": "Message",
+          "type": "string"
+        },
+        "field": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Field"
+        },
+        "evidence": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Evidence"
+        },
+        "blocking": {
+          "default": false,
+          "title": "Blocking",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "code",
+        "severity",
+        "message"
+      ],
+      "title": "ValidationIssue",
+      "type": "object"
+    },
+    "OutputRecord": {
+      "properties": {
+        "operation": {
+          "$ref": "#/$defs/OperationType"
+        },
+        "document_info": {
+          "$ref": "#/$defs/DocumentInfo"
+        },
+        "transaction_party": {
+          "$ref": "#/$defs/TransactionParty"
+        },
+        "charge_details": {
+          "$ref": "#/$defs/ChargeDetails"
+        },
+        "financial_attributes": {
+          "$ref": "#/$defs/FinancialAttributes"
+        },
+        "audit_trail": {
+          "$ref": "#/$defs/AuditTrail"
+        }
+      },
+      "required": [
+        "operation",
+        "audit_trail"
+      ],
+      "title": "OutputRecord",
+      "type": "object"
+    }
+  }
+}
